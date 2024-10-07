@@ -1,4 +1,3 @@
-# views.py
 from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
@@ -49,6 +48,7 @@ class LoginView(APIView):
 class UserProfileViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = UserProfileSerializer
+    queryset = UserProfile.objects.all()
 
     def get_queryset(self):
         return UserProfile.objects.filter(user=self.request.user)
@@ -68,6 +68,7 @@ class ProductViewSet(viewsets.ModelViewSet):
 class CartViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = CartSerializer
+    queryset = Cart.objects.all()
 
     def get_queryset(self):
         return Cart.objects.filter(user=self.request.user)
@@ -126,6 +127,7 @@ class CartViewSet(viewsets.ModelViewSet):
 class OrderViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = OrderSerializer
+    queryset = Order.objects.all()
 
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user)
